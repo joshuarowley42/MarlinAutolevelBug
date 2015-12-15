@@ -1082,15 +1082,19 @@ static void do_blocking_move_to(float x, float y, float z) {
     feedrate = homing_feedrate[Z_AXIS];
 
     current_position[Z_AXIS] = z;
+    SERIAL_ECHOLN("Started Z Move");
     plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], feedrate/60, active_extruder);
     st_synchronize();
+    SERIAL_ECHOLN("Finished Z Move");
 
     feedrate = XY_TRAVEL_SPEED;
 
     current_position[X_AXIS] = x;
     current_position[Y_AXIS] = y;
+    SERIAL_ECHOLN("Started XY Move");
     plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], feedrate/60, active_extruder);
     st_synchronize();
+    SERIAL_ECHOLN("Finished XY Move");
 
     feedrate = oldFeedRate;
 }
